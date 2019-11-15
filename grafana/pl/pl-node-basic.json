@@ -47,7 +47,7 @@
   "gnetId": 11074,
   "graphTooltip": 0,
   "id": 14,
-  "iteration": 1573799288252,
+  "iteration": 1573804868945,
   "links": [
     {
       "asDropdown": false,
@@ -3099,8 +3099,27 @@
   "templating": {
     "list": [
       {
+        "current": {
+          "selected": true,
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "node-exporter",
           "value": "node-exporter"
         },
@@ -3126,6 +3145,7 @@
       {
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "VM_4_11_centos",
           "value": "VM_4_11_centos"
         },
@@ -3152,6 +3172,7 @@
         "allFormat": "glob",
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "9.139.4.11:9100",
           "value": "9.139.4.11:9100"
         },
@@ -3178,6 +3199,7 @@
       {
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "/",
           "value": "/"
         },
@@ -3205,6 +3227,7 @@
         "allValue": null,
         "current": {
           "isNone": true,
+          "selected": true,
           "text": "None",
           "value": ""
         },
@@ -3233,6 +3256,7 @@
         "allValue": "",
         "current": {
           "isNone": true,
+          "selected": true,
           "text": "None",
           "value": ""
         },
@@ -3300,5 +3324,5 @@
   "timezone": "browser",
   "title": "pl-node-basic",
   "uid": "hb7fSE0Zz",
-  "version": 6
+  "version": 8
 }
