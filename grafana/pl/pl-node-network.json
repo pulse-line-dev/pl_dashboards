@@ -1,0 +1,5269 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "6.3.5"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Pulse Line style PMET dashboards from node_exporter",
+  "editable": true,
+  "gnetId": 11212,
+  "graphTooltip": 0,
+  "id": 21,
+  "iteration": 1574056216425,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "info",
+      "includeVars": false,
+      "tags": [
+        "$node"
+      ],
+      "targetBlank": true,
+      "title": "Server IP：$node",
+      "type": "link",
+      "url": ""
+    },
+    {
+      "icon": "external link",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Update node_exporter",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://github.com/prometheus/node_exporter/releases"
+    },
+    {
+      "icon": "external link",
+      "tags": [],
+      "targetBlank": true,
+      "title": "Update Dashboards",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://grafana.com/dashboards/11074"
+    },
+    {
+      "icon": "external link",
+      "tags": [],
+      "targetBlank": true,
+      "title": "StarsL's Blog",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://starsl.cn"
+    }
+  ],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 206,
+      "panels": [],
+      "title": "System info",
+      "type": "row"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorPostfix": true,
+      "colorValue": true,
+      "colors": [
+        "rgba(245, 54, 54, 0.9)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(50, 172, 45, 0.97)"
+      ],
+      "datasource": "Prometheus",
+      "decimals": 1,
+      "description": "System uptime from /proc/stat",
+      "format": "s",
+      "gauge": {
+        "maxValue": 100,
+        "minValue": 0,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": true
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "hideTimeOverride": true,
+      "id": 208,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "nullPointMode": "null",
+      "nullText": null,
+      "options": {},
+      "postfix": "s",
+      "postfixFontSize": "110%",
+      "prefix": "",
+      "prefixFontSize": "80%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "node_time_seconds{instance=~\"$node\",job=~\"$job\"} - node_boot_time_seconds{instance=~\"$node\",job=~\"$job\"}",
+          "instant": true,
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}",
+          "refId": "A",
+          "step": 1800
+        }
+      ],
+      "thresholds": "2,3",
+      "title": "Uptime",
+      "type": "singlestat",
+      "valueFontSize": "150%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "columns": [],
+      "datasource": "Prometheus",
+      "description": "Labeled system information as provided by the uname system call.",
+      "fontSize": "110%",
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 4,
+        "y": 1
+      },
+      "id": 178,
+      "links": [],
+      "options": {},
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 6,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Hostname",
+          "colorMode": null,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "nodename",
+          "thresholds": [
+            ""
+          ],
+          "type": "string",
+          "unit": "bytes"
+        },
+        {
+          "alias": "Release",
+          "colorMode": "value",
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "release",
+          "thresholds": [
+            "10000000000",
+            "20000000000"
+          ],
+          "type": "string",
+          "unit": "bytes"
+        },
+        {
+          "alias": "System",
+          "colorMode": "cell",
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "sysname",
+          "thresholds": [
+            "0.6",
+            "0.8"
+          ],
+          "type": "string",
+          "unit": "percentunit"
+        },
+        {
+          "alias": "Version",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 1,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "version",
+          "thresholds": [],
+          "type": "string",
+          "unit": "bytes"
+        },
+        {
+          "alias": "Domain name",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "domainname",
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "IP",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "link": false,
+          "mappingType": 1,
+          "pattern": "instance",
+          "preserveFormat": false,
+          "sanitize": false,
+          "thresholds": [],
+          "type": "string",
+          "unit": "short"
+        },
+        {
+          "alias": "System Time",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value #B",
+          "thresholds": [],
+          "type": "date",
+          "unit": "dateTimeFromNow"
+        },
+        {
+          "alias": "Entropy",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Value #C",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "preserveFormat": true,
+          "sanitize": false,
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "node_uname_info{instance=~'$node'}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        },
+        {
+          "expr": "node_time_seconds{instance=~'$node'}*1000",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "B"
+        },
+        {
+          "expr": "node_entropy_available_bits{instance=~'$node'}-0",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "C"
+        }
+      ],
+      "title": "System general information",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "columns": [],
+      "datasource": "Prometheus",
+      "description": "Network devices except for Hyper-V eth",
+      "fontSize": "110%",
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 264,
+      "links": [],
+      "options": {},
+      "pageSize": null,
+      "scroll": true,
+      "showHeader": true,
+      "sort": {
+        "col": 6,
+        "desc": false
+      },
+      "styles": [
+        {
+          "alias": "Network Device",
+          "colorMode": null,
+          "colors": [
+            "rgba(50, 172, 45, 0.97)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(245, 54, 54, 0.9)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "device",
+          "thresholds": [
+            ""
+          ],
+          "type": "string",
+          "unit": "bytes"
+        },
+        {
+          "alias": "",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "/.*/",
+          "preserveFormat": true,
+          "sanitize": false,
+          "thresholds": [],
+          "type": "hidden",
+          "unit": "short"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "node_network_device_id{instance=~'$node',device!~\"veth.*\"}",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "System network devices",
+      "transform": "table",
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 202,
+      "panels": [],
+      "title": "Network Traffic",
+      "type": "row"
+    },
+    {
+      "aliasColors": {
+        "receive_packets_eth0": "#7EB26D",
+        "receive_packets_lo": "#E24D42",
+        "transmit_packets_eth0": "#7EB26D",
+        "transmit_packets_lo": "#E24D42"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 4,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 251,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_bytes_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive",
+          "refId": "O",
+          "step": 240
+        },
+        {
+          "expr": "irate(node_network_transmit_bytes_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Transmit",
+          "refId": "P",
+          "step": 240
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": "Bytes out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "receive_packets_eth0": "#7EB26D",
+        "receive_packets_lo": "#E24D42",
+        "transmit_packets_eth0": "#7EB26D",
+        "transmit_packets_lo": "#E24D42"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "id": 253,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_packets_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive",
+          "refId": "O",
+          "step": 4
+        },
+        {
+          "expr": "irate(node_network_transmit_packets_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Transmit",
+          "refId": "P",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic by Packets",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "pps",
+          "label": "Packets out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 26
+      },
+      "id": 255,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.errors.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.errors.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.errors.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.errors.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*.errors.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*.errors.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*.errors.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_errs_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive errors",
+          "refId": "E",
+          "step": 4
+        },
+        {
+          "expr": "irate(node_network_transmit_errs_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Rransmit errors",
+          "refId": "F",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Errors",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "pps",
+          "label": "Packets out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 36
+      },
+      "id": 257,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.drop.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.drop.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.drop.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.drop.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*.drop.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*.drop.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*.drop.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_drop_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive drop",
+          "refId": "G",
+          "step": 4
+        },
+        {
+          "expr": "irate(node_network_transmit_drop_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Transmit drop",
+          "refId": "H",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Drop",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "pps",
+          "label": "Packets out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 36
+      },
+      "id": 259,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.compressed.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.compressed.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.compressed.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.compressed.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*.compressed.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*.compressed.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*.compressed.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_compressed_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive compressed",
+          "refId": "C",
+          "step": 4
+        },
+        {
+          "expr": "irate(node_network_transmit_compressed_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Transmit compressed",
+          "refId": "D",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Compressed",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "pps",
+          "label": "Packets out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 46
+      },
+      "id": 266,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.frame.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.frame.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.frame.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.frame.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*.frame.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*.frame.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*.frame.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_frame_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "hide": false,
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive frame",
+          "refId": "K",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Frame",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "pps",
+          "label": "Packets out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 46
+      },
+      "id": 263,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.fifo.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.fifo.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.fifo.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.fifo.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*.fifo.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*.fifo.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*.fifo.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_fifo_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive fifo",
+          "refId": "I",
+          "step": 4
+        },
+        {
+          "expr": "irate(node_network_transmit_fifo_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Transmit fifo",
+          "refId": "J",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Fifo",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "pps",
+          "label": "Packets out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 56
+      },
+      "id": 261,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.multicast.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.multicast.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.multicast.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.multicast.*/",
+          "color": "#EF843C"
+        },
+        {
+          "alias": "/.*eth3.*.multicast.*/",
+          "color": "#E24D42"
+        },
+        {
+          "alias": "/.*eth4.*.multicast.*/",
+          "color": "#1F78C1"
+        },
+        {
+          "alias": "/.*eth5.*.multicast.*/",
+          "color": "#BA43A9"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_receive_multicast_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Receive multicast",
+          "refId": "M",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Multicast",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "pps",
+          "label": "Packets out (-) / in (+)",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 56
+      },
+      "id": 268,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.carrier.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.carrier.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.carrier.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.carrier.*/",
+          "color": "#EF843C"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_transmit_carrier_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Statistic transmit_carrier",
+          "refId": "C",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Carrier",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Counter",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 66
+      },
+      "id": 270,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "sideWidth": 300,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "/.*Trans.*/",
+          "transform": "negative-Y"
+        },
+        {
+          "alias": "/.*lo.*.carrier.*/",
+          "color": "#7EB26D"
+        },
+        {
+          "alias": "/.*eth0.*.carrier.*/",
+          "color": "#EAB839"
+        },
+        {
+          "alias": "/.*eth1.*.carrier.*/",
+          "color": "#6ED0E0"
+        },
+        {
+          "alias": "/.*eth2.*.carrier.*/",
+          "color": "#EF843C"
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "irate(node_network_transmit_colls_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{device}} - Transmit colls",
+          "refId": "C",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Network Traffic Colls",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Counter",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 66
+      },
+      "id": 272,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "alias": "NF conntrack limit",
+          "color": "#890F02",
+          "fill": 0
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "node_nf_conntrack_entries{instance=~\"$node\",job=~\"$job\"}",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "NF conntrack entries",
+          "refId": "O",
+          "step": 4
+        },
+        {
+          "expr": "node_nf_conntrack_entries_limit{instance=~\"$node\",job=~\"$job\"}",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "NF conntrack limit",
+          "refId": "P",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "NF Contrack",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Entries",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 76
+      },
+      "id": 274,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "node_arp_entries{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}",
+          "format": "time_series",
+          "intervalFactor": 2,
+          "legendFormat": "{{ device }} - ARP entries",
+          "refId": "O",
+          "step": 4
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "ARP Entries",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Entries",
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 86
+      },
+      "id": 276,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "id": 278,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "node_sockstat_TCP_alloc{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "TCP_alloc - Allocated sockets",
+              "refId": "D",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_TCP_inuse{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "TCP_inuse - Tcp sockets currently in use",
+              "refId": "E",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_TCP_mem{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "TCP_mem - Used memory for tcp",
+              "refId": "F",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_TCP_orphan{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "TCP_orphan - Orphan sockets",
+              "refId": "H",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_TCP_tw{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "TCP_tw - Sockets wating close",
+              "refId": "I",
+              "step": 240
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Sockstat TCP",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Sockets",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "id": 280,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "node_sockstat_UDPLITE_inuse{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "UDPLITE_inuse - Udplite sockets currently in use",
+              "refId": "J",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_UDP_inuse{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "UDP_inuse - Udp sockets currently in use",
+              "refId": "K",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_UDP_mem{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "UDP_mem - Used memory for udp",
+              "refId": "L",
+              "step": 240
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Sockstat UDP",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Sockets",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 11
+          },
+          "id": 282,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "node_sockstat_sockets_used{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Sockets_used - Sockets currently in use",
+              "refId": "N",
+              "step": 240
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Sockstat Used",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Sockets",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 11
+          },
+          "id": 284,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "node_sockstat_TCP_mem_bytes{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "TCP_mem_bytes - ",
+              "refId": "G",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_UDP_mem_bytes{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "UDP_mem_bytes - ",
+              "refId": "A",
+              "step": 240
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Sockstat Memory Size",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "bytes",
+              "label": "Bytes",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 21
+          },
+          "id": 286,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": 300,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "node_sockstat_FRAG_inuse{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "FRAG_inuse - Frag sockets currently in use",
+              "refId": "A",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_FRAG_memory{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "FRAG_memory - Used memory for frag",
+              "refId": "B",
+              "step": 240
+            },
+            {
+              "expr": "node_sockstat_RAW_inuse{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "RAW_inuse - Raw sockets currently in use",
+              "refId": "C",
+              "step": 240
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Sockstat FRAG / RAW",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Sockets",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Network Sockstat",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 87
+      },
+      "id": 288,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "height": "",
+          "id": 290,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": 300,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Octets.*/",
+              "color": "#7EB26D"
+            },
+            {
+              "alias": "/.*McastPkts.*/",
+              "color": "#EAB839"
+            },
+            {
+              "alias": "/.*McastOctets.*/",
+              "color": "#6ED0E0"
+            },
+            {
+              "alias": "/.*BcastPkts.*/",
+              "color": "#EF843C"
+            },
+            {
+              "alias": "/.*BcastOctets.*/",
+              "color": "#E24D42"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_IpExt_InOctets{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InOctets - Received octets",
+              "refId": "K",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_IpExt_OutOctets{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutOctets - Sent octets",
+              "refId": "Q",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Netstat IP In / Out Octets",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Octects out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "height": "",
+          "id": 292,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sideWidth": 300,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Ip_ForwDatagrams{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "ForwDatagrams - IP outforwdatagrams",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Ip_Forwarding{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "Forwarding - IP forwarding",
+              "refId": "D",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "Netstat IP Forwarding",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Datagrams",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Netstat IP",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 88
+      },
+      "id": 294,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "height": "",
+          "id": 296,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": true,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*InSegs.*/",
+              "color": "#CCA300"
+            },
+            {
+              "alias": "/.*OutSegs.*/",
+              "color": "#CCA300"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Tcp_InCsumErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InCsumErrors - Segments received with checksum errors",
+              "refId": "E",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_InErrs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InErrs - Segments received in error (e.g., bad TCP checksums)",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_InSegs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InSegs - Segments received, including those received in error. This count includes segments received on currently established connections",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_OutRsts{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "OutRsts - Segments sent containing the RST flag",
+              "refId": "I",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_OutSegs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "OutSegs - Segments sent, including those on current connections but excluding those containing only retransmitted octets",
+              "refId": "J",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_RetransSegs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "RetransSegs - Segments retransmitted - that is, the number of TCP segments transmitted containing one or more previously transmitted octets",
+              "refId": "A",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "TCP Segments",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Segments out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "height": "",
+          "id": 298,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*MaxConn *./",
+              "color": "#890F02",
+              "fill": 0
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "node_netstat_Tcp_CurrEstab{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "CurrEstab - TCP connections for which the current state is either ESTABLISHED or CLOSE- WAIT",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "node_netstat_Tcp_MaxConn{instance=~\"$node\",job=~\"$job\"}",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "MaxConn - Limit on the total number of TCP connections the entity can support (Dinamic is \"-1\")",
+              "refId": "H",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "TCP Connections",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Connections",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 11
+          },
+          "height": "",
+          "id": 302,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Tcp_ActiveOpens{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "ActiveOpens - TCP connections that have made a direct transition to the SYN-SENT state from the CLOSED state",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_AttemptFails{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "AttemptFails - TCP connections that have made a direct transition to the CLOSED state from either the SYN-SENT and SYN-RCVD",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_EstabResets{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "EstabResets - TCP connections that have made a direct transition to the CLOSED state from either the ESTABLISHED state or the CLOSE-WAIT state",
+              "refId": "D",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Tcp_PassiveOpens{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "PassiveOpens - TCP connections that have made a direct transition to the SYN-RCVD state from the LISTEN state",
+              "refId": "K",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "TCP Direct Transition",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Connections",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 11
+          },
+          "height": "",
+          "id": 304,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Sent.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "SyncookiesSent - SYN cookies sent",
+              "color": "#E0F9D7"
+            },
+            {
+              "alias": "SyncookiesRecv - SYN cookies received",
+              "color": "#E0F9D7"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_TcpExt_SyncookiesFailed{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "SyncookiesFailed - Invalid SYN cookies received",
+              "refId": "R",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_TcpExt_SyncookiesRecv{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "SyncookiesRecv - SYN cookies received",
+              "refId": "S",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_TcpExt_SyncookiesSent{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "SyncookiesSent - SYN cookies sent",
+              "refId": "T",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "TCP SynCookie / Challenge",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Counter out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 21
+          },
+          "height": "",
+          "id": 306,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_TcpExt_ListenDrops{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "ListenDrops - SYNs to LISTEN sockets ignored",
+              "refId": "H",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "TCP DROPS",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Counter",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "description": "",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 21
+          },
+          "height": "",
+          "id": 308,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_TcpExt_ListenOverflows{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "ListenOverflows - Times the listen queue of a socket overflowed",
+              "refId": "I",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "TCP Issues",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Counter",
+              "logBase": 1,
+              "max": null,
+              "min": "0",
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Netstat TCP",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 89
+      },
+      "id": 310,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": null,
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "height": "",
+          "id": 312,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Snd.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Datagrams.*/",
+              "color": "#EAB839"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Udp_InDatagrams{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InDatagrams - Datagrams received",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Udp_OutDatagrams{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutDatagrams - Datagrams sent",
+              "refId": "E",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "UDP In / Out",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Datagrams out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "height": "",
+          "id": 314,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Snd.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*bufErrors.*/",
+              "color": "#70DBED"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Udp_InCsumErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InCsumErrors - Datagrams with checksum errors",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Udp_InErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InErrors - Datagrams that could not be delivered to an application",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Udp_RcvbufErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "RcvbufErrors - Datagrams for which not enough socket buffer memory to receive",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Udp_SndbufErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "SndbufErrors - Datagrams for which not enough socket buffer memory to transmit",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Udp_NoPorts{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "NoPorts - Datagrams received on a port with no listener",
+              "refId": "B",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "UDP Errors",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Datagrams out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 11
+          },
+          "height": "",
+          "id": 316,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Datagrams.*/",
+              "color": "#EAB839"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_UdpLite_InDatagrams{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InDatagrams - Packets received",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_UdpLite_OutDatagrams{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutDatagrams - Packets sent",
+              "refId": "E",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "UDP Lite In / Out",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Datagrams out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 11
+          },
+          "height": "",
+          "id": 318,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*bufErrors.*/",
+              "color": "#6ED0E0"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_UdpLite_InCsumErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InCsumErrors - Datagrams with checksum errors",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_UdpLite_InErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InErrors - Datagrams that could not be delivered to an application",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_UdpLite_RcvbufErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "RcvbufErrors - Datagrams for which not enough socket buffer memory to receive",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_UdpLite_SndbufErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "SndbufErrors - Datagrams for which not enough socket buffer memory to transmit",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_UdpLite_NoPorts{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "NoPorts - Datagrams received on a port with no listener",
+              "refId": "B",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "UDP Lite Errors",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Datagrams out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Netstat UDP",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 90
+      },
+      "id": 320,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": null,
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 1
+          },
+          "height": "",
+          "id": 322,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Type3.*/",
+              "color": "#EAB839"
+            },
+            {
+              "alias": "/.*SrcQuenchs.*/",
+              "color": "#705DA0"
+            },
+            {
+              "alias": "/.*ParmProb.*/",
+              "color": "#70DBED"
+            },
+            {
+              "alias": "/.*TimeExcds.*/",
+              "color": "#EA6460"
+            },
+            {
+              "alias": "/.*DestUnreachs.*/",
+              "color": "#7EB26D"
+            },
+            {
+              "alias": "/.*InErrors.*/",
+              "color": "#890F02"
+            },
+            {
+              "alias": "/.*OutErrors.*/",
+              "color": "#890F02"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Icmp_InErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InErrors - Messages which the entity received but determined as having ICMP-specific errors (bad ICMP checksums, bad length, etc.)",
+              "refId": "I",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutErrors - Messages which this entity did not send due to problems discovered within ICMP, such as a lack of buffers",
+              "refId": "V",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InDestUnreachs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InDestUnreachs - Destination Unreachable messages received",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutDestUnreachs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutDestUnreachs - Destination Unreachable messages sent",
+              "refId": "B",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_IcmpMsg_InType3{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InType3 - Destination unreachable",
+              "refId": "K",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_IcmpMsg_OutType3{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "OutType3 - Destination unreachable",
+              "refId": "L",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_IcmpMsg_InType11{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InType11 - Time Exceeded",
+              "refId": "C",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "ICMP Errors 1",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Messages out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": null,
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 1
+          },
+          "height": "",
+          "id": 324,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Type3.*/",
+              "color": "#EAB839"
+            },
+            {
+              "alias": "/.*SrcQuenchs.*/",
+              "color": "#705DA0"
+            },
+            {
+              "alias": "/.*ParmProb.*/",
+              "color": "#70DBED"
+            },
+            {
+              "alias": "/.*TimeExcds.*/",
+              "color": "#EA6460"
+            },
+            {
+              "alias": "/.*DestUnreachs.*/",
+              "color": "#7EB26D"
+            },
+            {
+              "alias": "/.*InErrors.*/",
+              "color": "#890F02"
+            },
+            {
+              "alias": "/.*OutErrors.*/",
+              "color": "#890F02"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Icmp_InCsumErrors{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InCsumErrors - Messages with ICMP checksum errors",
+              "refId": "E",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InTimeExcds{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InTimeExcds - Time Exceeded messages received",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutTimeExcds{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "OutTimeExcds - Time Exceeded messages sent",
+              "refId": "D",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InParmProbs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InParmProbs - Parameter Problem messages received",
+              "refId": "F",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutParmProbs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "OutParmProb - Parameter Problem messages sent",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InSrcQuenchs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "InSrcQuenchs - Source Quench messages received",
+              "refId": "H",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutSrcQuenchs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "hide": false,
+              "intervalFactor": 2,
+              "legendFormat": "OutSrcQuenchs - Source Quench messages sent",
+              "refId": "J",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "ICMP Errors 2",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Messages out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": null,
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 11
+          },
+          "height": "",
+          "id": 326,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*Msgs.*/",
+              "color": "#6ED0E0"
+            },
+            {
+              "alias": "/.*Redirects.*/",
+              "color": "#F9BA8F"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Icmp_InMsgs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InMsgs -  Messages which the entity received. Note that this counter includes all those counted by icmpInErrors",
+              "refId": "J",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InRedirects{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InRedirects - Redirect messages received",
+              "refId": "L",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutMsgs{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutMsgs - Messages which this entity attempted to send. Note that this counter includes all those counted by icmpOutErrors",
+              "refId": "W",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutRedirects{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutRedirects -  Redirect messages sent. For a host, this object will always be zero, since hosts do not send redirects",
+              "refId": "Y",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "ICMP In / Out - Messages / Redirects",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Messages out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": null,
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 11
+          },
+          "height": "",
+          "id": 328,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*TimestampReps.*/",
+              "color": "#F9934E"
+            },
+            {
+              "alias": "/.*Timestamps -.*/",
+              "color": "#6ED0E0"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Icmp_InTimestampReps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InTimestampReps - Timestamp Reply messages received",
+              "refId": "O",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InTimestamps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InTimestamps - Timestamp (request) messages received",
+              "refId": "P",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutTimestampReps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutTimestampReps - Timestamp Reply messages sent",
+              "refId": "A",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutTimestamps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutTimestamps - Timestamp (request) messages sent",
+              "refId": "B",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "ICMP Timestamps",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Messages out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": null,
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 0,
+            "y": 21
+          },
+          "height": "",
+          "id": 330,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*EchoReps.*/",
+              "color": "#D683CE"
+            },
+            {
+              "alias": "/.*Echos -.*/",
+              "color": "#F9934E"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Icmp_InEchoReps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InEchoReps - Echo Reply messages received",
+              "refId": "G",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InEchos{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InEchos - Echo (request) messages received",
+              "refId": "H",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutEchoReps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutEchoReps - Echo Reply messages sent",
+              "refId": "T",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutEchos{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutEchos - Echo (request) messages sent",
+              "refId": "U",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "ICMP Echos",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Messages out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": "Prometheus",
+          "decimals": null,
+          "fill": 2,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 10,
+            "w": 12,
+            "x": 12,
+            "y": 21
+          },
+          "height": "",
+          "id": 332,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "maxPerRow": 12,
+          "nullPointMode": "null",
+          "options": {
+            "dataLinks": []
+          },
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "/.*Out.*/",
+              "transform": "negative-Y"
+            },
+            {
+              "alias": "/.*AddrMaskReps.*/",
+              "color": "#B7DBAB"
+            },
+            {
+              "alias": "/.*Masks -.*/",
+              "color": "#E5AC0E"
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "irate(node_netstat_Icmp_InAddrMaskReps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InAddrMaskReps - Address Mask Reply messages received",
+              "refId": "C",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_InAddrMasks{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "InAddrMasks - Address Mask Request messages received",
+              "refId": "D",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutAddrMaskReps{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutAddrMaskReps - Address Mask Reply messages sent",
+              "refId": "Q",
+              "step": 4
+            },
+            {
+              "expr": "irate(node_netstat_Icmp_OutAddrMasks{instance=~\"$node\",job=~\"$job\"}[5m])",
+              "format": "time_series",
+              "intervalFactor": 2,
+              "legendFormat": "OutAddrMasks - Address Mask Request messages sent",
+              "refId": "R",
+              "step": 4
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeRegions": [],
+          "timeShift": null,
+          "title": "ICMP Masks",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "buckets": null,
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Messages out (-) / in (+)",
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false,
+            "alignLevel": null
+          }
+        }
+      ],
+      "title": "Netstat ICMP",
+      "type": "row"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 19,
+  "style": "dark",
+  "tags": [
+    "Prometheus",
+    "node_exporter",
+    "pulse-line",
+    "network"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "text": "Prometheus",
+          "value": "Prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "datasource",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "node-exporter",
+          "value": "node-exporter"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(node_uname_info, job)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "JOB",
+        "multi": false,
+        "name": "job",
+        "options": [],
+        "query": "label_values(node_uname_info, job)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "VM_4_11_centos",
+          "value": "VM_4_11_centos"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Host",
+        "multi": false,
+        "name": "hostname",
+        "options": [],
+        "query": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allFormat": "glob",
+        "allValue": null,
+        "current": {
+          "text": "9.139.4.11:9100",
+          "value": "9.139.4.11:9100"
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "IP",
+        "multi": false,
+        "multiFormat": "regex values",
+        "name": "node",
+        "options": [],
+        "query": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "text": "/",
+          "value": "/"
+        },
+        "datasource": "Prometheus",
+        "definition": "",
+        "hide": 2,
+        "includeAll": false,
+        "label": "",
+        "multi": false,
+        "name": "maxmount",
+        "options": [],
+        "query": "query_result(topk(1,sort_desc (max(node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs\"}) by (mountpoint))))",
+        "refresh": 2,
+        "regex": "/.*\\\"(.*)\\\".*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allFormat": "glob",
+        "allValue": null,
+        "current": {
+          "isNone": true,
+          "text": "None",
+          "value": ""
+        },
+        "datasource": "Prometheus",
+        "definition": "",
+        "hide": 2,
+        "includeAll": false,
+        "label": "环境",
+        "multi": false,
+        "multiFormat": "regex values",
+        "name": "env",
+        "options": [],
+        "query": "label_values(node_exporter_build_info,env)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allFormat": "glob",
+        "allValue": "",
+        "current": {
+          "isNone": true,
+          "text": "None",
+          "value": ""
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(node_exporter_build_info{env=~'$env'},name)",
+        "hide": 2,
+        "includeAll": false,
+        "label": "名称",
+        "multi": false,
+        "multiFormat": "regex values",
+        "name": "name",
+        "options": [],
+        "query": "label_values(node_exporter_build_info{env=~'$env'},name)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "/.*/",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": "",
+        "current": {
+          "tags": [],
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "Prometheus",
+        "definition": "label_values(node_network_device_id{instance=\"$node\",device!~\"veth.*\"},device)",
+        "hide": 0,
+        "includeAll": true,
+        "label": "nic",
+        "multi": true,
+        "name": "nic",
+        "options": [],
+        "query": "label_values(node_network_device_id{instance=\"$node\",device!~\"veth.*\"},device)",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "datasource": "Prometheus",
+        "filters": [],
+        "hide": 0,
+        "label": "",
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {
+    "now": true,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ]
+  },
+  "timezone": "browser",
+  "title": "pl-node-network",
+  "uid": "BC038A53D8B4EC567AFF7EC4BCBE72D4",
+  "version": 1
+}
