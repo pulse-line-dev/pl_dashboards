@@ -1123,7 +1123,8 @@
   "tags": [
     "Prometheus",
     "node_exporter",
-    "pulse-line"
+    "pulse-line",
+    "cpu"
   ],
   "templating": {
     "list": [
