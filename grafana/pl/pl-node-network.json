@@ -1,14 +1,5 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
+  "__inputs": [],
   "__requires": [
     {
       "type": "grafana",
@@ -27,6 +18,18 @@
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
     }
   ],
   "annotations": {
@@ -46,8 +49,8 @@
   "editable": true,
   "gnetId": 11212,
   "graphTooltip": 0,
-  "id": 21,
-  "iteration": 1574056216425,
+  "id": null,
+  "iteration": 1577530101641,
   "links": [
     {
       "asDropdown": false,
@@ -65,28 +68,19 @@
       "icon": "external link",
       "tags": [],
       "targetBlank": true,
-      "title": "Update node_exporter",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://github.com/prometheus/node_exporter/releases"
-    },
-    {
-      "icon": "external link",
-      "tags": [],
-      "targetBlank": true,
       "title": "Update Dashboards",
       "tooltip": "",
       "type": "link",
-      "url": "https://grafana.com/dashboards/11074"
+      "url": "https://grafana.com/dashboards/11215"
     },
     {
       "icon": "external link",
       "tags": [],
       "targetBlank": true,
-      "title": "StarsL's Blog",
+      "title": "Pulse Line Dev",
       "tooltip": "",
       "type": "link",
-      "url": "https://starsl.cn"
+      "url": "https://github.com/pulse-line-dev"
     }
   ],
   "panels": [
@@ -113,7 +107,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 1,
       "description": "System uptime from /proc/stat",
       "format": "s",
@@ -192,7 +186,7 @@
     },
     {
       "columns": [],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Labeled system information as provided by the uname system call.",
       "fontSize": "110%",
       "gridPos": {
@@ -405,7 +399,7 @@
     },
     {
       "columns": [],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Network devices except for Hyper-V eth",
       "fontSize": "110%",
       "gridPos": {
@@ -498,7 +492,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 4,
       "fillGradient": 0,
       "gridPos": {
@@ -573,7 +567,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive",
+          "legendFormat": "{{ device }}  - Receive",
           "refId": "O",
           "step": 240
         },
@@ -581,7 +575,7 @@
           "expr": "irate(node_network_transmit_bytes_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Transmit",
+          "legendFormat": "{{ device }}  - Transmit",
           "refId": "P",
           "step": 240
         }
@@ -637,7 +631,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -712,7 +706,7 @@
           "expr": "irate(node_network_receive_packets_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive",
+          "legendFormat": "{{ device }}  - Receive",
           "refId": "O",
           "step": 4
         },
@@ -720,7 +714,7 @@
           "expr": "irate(node_network_transmit_packets_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Transmit",
+          "legendFormat": "{{ device }}  - Transmit",
           "refId": "P",
           "step": 4
         }
@@ -771,7 +765,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -850,7 +844,7 @@
           "expr": "irate(node_network_receive_errs_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive errors",
+          "legendFormat": "{{ device }}  - Receive errors",
           "refId": "E",
           "step": 4
         },
@@ -858,7 +852,7 @@
           "expr": "irate(node_network_transmit_errs_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Rransmit errors",
+          "legendFormat": "{{ device }}  - Rransmit errors",
           "refId": "F",
           "step": 4
         }
@@ -909,7 +903,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -988,7 +982,7 @@
           "expr": "irate(node_network_receive_drop_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive drop",
+          "legendFormat": "{{ device }}  - Receive drop",
           "refId": "G",
           "step": 4
         },
@@ -996,7 +990,7 @@
           "expr": "irate(node_network_transmit_drop_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Transmit drop",
+          "legendFormat": "{{ device }}  - Transmit drop",
           "refId": "H",
           "step": 4
         }
@@ -1047,7 +1041,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -1126,7 +1120,7 @@
           "expr": "irate(node_network_receive_compressed_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive compressed",
+          "legendFormat": "{{ device }}  - Receive compressed",
           "refId": "C",
           "step": 4
         },
@@ -1134,7 +1128,7 @@
           "expr": "irate(node_network_transmit_compressed_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Transmit compressed",
+          "legendFormat": "{{ device }}  - Transmit compressed",
           "refId": "D",
           "step": 4
         }
@@ -1185,7 +1179,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -1265,7 +1259,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive frame",
+          "legendFormat": "{{ device }}  - Receive frame",
           "refId": "K",
           "step": 4
         }
@@ -1316,7 +1310,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -1395,7 +1389,7 @@
           "expr": "irate(node_network_receive_fifo_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive fifo",
+          "legendFormat": "{{ device }}  - Receive fifo",
           "refId": "I",
           "step": 4
         },
@@ -1403,7 +1397,7 @@
           "expr": "irate(node_network_transmit_fifo_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Transmit fifo",
+          "legendFormat": "{{ device }}  - Transmit fifo",
           "refId": "J",
           "step": 4
         }
@@ -1454,7 +1448,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -1533,7 +1527,7 @@
           "expr": "irate(node_network_receive_multicast_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Receive multicast",
+          "legendFormat": "{{ device }}  - Receive multicast",
           "refId": "M",
           "step": 4
         }
@@ -1584,7 +1578,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -1651,7 +1645,7 @@
           "expr": "irate(node_network_transmit_carrier_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Statistic transmit_carrier",
+          "legendFormat": "{{ device }}  - Statistic transmit_carrier",
           "refId": "C",
           "step": 4
         }
@@ -1702,7 +1696,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -1769,7 +1763,7 @@
           "expr": "irate(node_network_transmit_colls_total{instance=~\"$node\",job=~\"$job\",device=~\"$nic\"}[5m])",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{device}} - Transmit colls",
+          "legendFormat": "{{ device }}  - Transmit colls",
           "refId": "C",
           "step": 4
         }
@@ -1820,7 +1814,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -1926,7 +1920,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
@@ -2028,7 +2022,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2155,7 +2149,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2266,7 +2260,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2361,7 +2355,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2464,7 +2458,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2589,7 +2583,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2721,7 +2715,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2841,7 +2835,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -2996,7 +2990,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3108,7 +3102,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3228,7 +3222,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fill": 2,
           "fillGradient": 0,
@@ -3359,7 +3353,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fill": 2,
           "fillGradient": 0,
@@ -3458,7 +3452,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fill": 2,
           "fillGradient": 0,
@@ -3571,7 +3565,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fill": 2,
           "fillGradient": 0,
@@ -3690,7 +3684,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3832,7 +3826,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3946,7 +3940,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -4098,7 +4092,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fill": 2,
           "fillGradient": 0,
@@ -4280,7 +4274,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fill": 2,
           "fillGradient": 0,
@@ -4466,7 +4460,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fill": 2,
           "fillGradient": 0,
@@ -4601,7 +4595,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fill": 2,
           "fillGradient": 0,
@@ -4736,7 +4730,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fill": 2,
           "fillGradient": 0,
@@ -4871,7 +4865,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "decimals": null,
           "fill": 2,
           "fillGradient": 0,
@@ -5026,7 +5020,7 @@
         "includeAll": false,
         "label": "",
         "multi": false,
-        "name": "datasource",
+        "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
@@ -5036,11 +5030,8 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "node-exporter",
-          "value": "node-exporter"
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_uname_info, job)",
         "hide": 0,
         "includeAll": false,
@@ -5061,20 +5052,16 @@
       },
       {
         "allValue": null,
-        "current": {
-          "tags": [],
-          "text": "VM_4_11_centos",
-          "value": "VM_4_11_centos"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(node_uname_info{job=~\"$job\"}, tke_cluster)",
         "hide": 0,
         "includeAll": false,
-        "label": "Host",
+        "label": "TKE",
         "multi": false,
-        "name": "hostname",
+        "name": "tke",
         "options": [],
-        "query": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "query": "label_values(node_uname_info{job=~\"$job\"}, tke_cluster)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -5088,12 +5075,9 @@
       {
         "allFormat": "glob",
         "allValue": null,
-        "current": {
-          "text": "9.139.4.11:9100",
-          "value": "9.139.4.11:9100"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(node_uname_info{tke_cluster=~\"$tke\"},instance)",
         "hide": 0,
         "includeAll": false,
         "label": "IP",
@@ -5101,7 +5085,7 @@
         "multiFormat": "regex values",
         "name": "node",
         "options": [],
-        "query": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "query": "label_values(node_uname_info{tke_cluster=~\"$tke\"},instance)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -5114,11 +5098,8 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "/",
-          "value": "/"
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "",
         "hide": 2,
         "includeAll": false,
@@ -5140,12 +5121,8 @@
       {
         "allFormat": "glob",
         "allValue": null,
-        "current": {
-          "isNone": true,
-          "text": "None",
-          "value": ""
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "",
         "hide": 2,
         "includeAll": false,
@@ -5168,12 +5145,8 @@
       {
         "allFormat": "glob",
         "allValue": "",
-        "current": {
-          "isNone": true,
-          "text": "None",
-          "value": ""
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_exporter_build_info{env=~'$env'},name)",
         "hide": 2,
         "includeAll": false,
@@ -5195,14 +5168,8 @@
       },
       {
         "allValue": "",
-        "current": {
-          "tags": [],
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_network_device_id{instance=\"$node\",device!~\"veth.*\"},device)",
         "hide": 0,
         "includeAll": true,
@@ -5222,7 +5189,7 @@
         "useTags": false
       },
       {
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "filters": [],
         "hide": 0,
         "label": "",
@@ -5265,5 +5232,5 @@
   "timezone": "browser",
   "title": "pl-node-network",
   "uid": "BC038A53D8B4EC567AFF7EC4BCBE72D4",
-  "version": 1
+  "version": 3
 }
