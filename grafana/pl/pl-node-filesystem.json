@@ -1,14 +1,5 @@
 {
-  "__inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "label": "Prometheus",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "prometheus",
-      "pluginName": "Prometheus"
-    }
-  ],
+  "__inputs": [],
   "__requires": [
     {
       "type": "grafana",
@@ -27,6 +18,18 @@
       "id": "prometheus",
       "name": "Prometheus",
       "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "singlestat",
+      "name": "Singlestat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
     }
   ],
   "annotations": {
@@ -46,8 +49,8 @@
   "editable": true,
   "gnetId": 11211,
   "graphTooltip": 0,
-  "id": 20,
-  "iteration": 1574055730359,
+  "id": null,
+  "iteration": 1577529678091,
   "links": [
     {
       "asDropdown": false,
@@ -65,28 +68,19 @@
       "icon": "external link",
       "tags": [],
       "targetBlank": true,
-      "title": "Update node_exporter",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://github.com/prometheus/node_exporter/releases"
-    },
-    {
-      "icon": "external link",
-      "tags": [],
-      "targetBlank": true,
       "title": "Update Dashboards",
       "tooltip": "",
       "type": "link",
-      "url": "https://grafana.com/dashboards/11074"
+      "url": "https://grafana.com/dashboards/11212"
     },
     {
       "icon": "external link",
       "tags": [],
       "targetBlank": true,
-      "title": "StarsL's Blog",
+      "title": "Pulse Line Dev",
       "tooltip": "",
       "type": "link",
-      "url": "https://starsl.cn"
+      "url": "https://github.com/pulse-line-dev"
     }
   ],
   "panels": [
@@ -113,7 +107,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 1,
       "description": "System uptime from /proc/stat",
       "format": "s",
@@ -192,7 +186,7 @@
     },
     {
       "columns": [],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Labeled system information as provided by the uname system call.",
       "fontSize": "110%",
       "gridPos": {
@@ -425,7 +419,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "Used Root FS",
       "format": "percent",
@@ -483,6 +477,7 @@
         {
           "expr": "100 - ((node_filesystem_avail_bytes{instance=~\"$node\",job=~\"$job\",mountpoint=\"/\",fstype!=\"rootfs\"} * 100) / node_filesystem_size_bytes{instance=~\"$node\",job=~\"$job\",mountpoint=\"/\",fstype!=\"rootfs\"})",
           "format": "time_series",
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A",
           "step": 900
@@ -510,7 +505,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "Total RootFS",
       "format": "bytes",
@@ -569,6 +564,7 @@
           "expr": "node_filesystem_size_bytes{instance=~\"$node\",job=~\"$job\",mountpoint=\"/\",fstype!=\"rootfs\"}",
           "format": "time_series",
           "hide": false,
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A",
           "step": 900
@@ -592,7 +588,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 3,
       "description": "",
       "fill": 2,
@@ -707,7 +703,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 2,
       "fillGradient": 0,
@@ -802,7 +798,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 2,
       "fillGradient": 0,
@@ -903,7 +899,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fill": 2,
       "fillGradient": 0,
@@ -1000,7 +996,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "",
       "fill": 2,
@@ -1106,14 +1102,15 @@
     "list": [
       {
         "current": {
-          "text": "Prometheus",
-          "value": "Prometheus"
+          "tags": [],
+          "text": "pl-consul-beta",
+          "value": "pl-consul-beta"
         },
         "hide": 0,
         "includeAll": false,
         "label": "",
         "multi": false,
-        "name": "datasource",
+        "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
@@ -1123,11 +1120,8 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "node-exporter",
-          "value": "node-exporter"
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_uname_info, job)",
         "hide": 0,
         "includeAll": false,
@@ -1148,19 +1142,16 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "VM_4_11_centos",
-          "value": "VM_4_11_centos"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(node_uname_info{job=~\"$job\"}, tke_cluster)",
         "hide": 0,
         "includeAll": false,
-        "label": "Host",
+        "label": "TKE",
         "multi": false,
-        "name": "hostname",
+        "name": "tke",
         "options": [],
-        "query": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "query": "label_values(node_uname_info{job=~\"$job\"}, tke_cluster)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -1174,12 +1165,9 @@
       {
         "allFormat": "glob",
         "allValue": null,
-        "current": {
-          "text": "9.139.4.11:9100",
-          "value": "9.139.4.11:9100"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(node_uname_info{tke_cluster=~\"$tke\"},instance)",
         "hide": 0,
         "includeAll": false,
         "label": "IP",
@@ -1187,7 +1175,7 @@
         "multiFormat": "regex values",
         "name": "node",
         "options": [],
-        "query": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "query": "label_values(node_uname_info{tke_cluster=~\"$tke\"},instance)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1200,11 +1188,8 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "/",
-          "value": "/"
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "",
         "hide": 2,
         "includeAll": false,
@@ -1226,12 +1211,8 @@
       {
         "allFormat": "glob",
         "allValue": null,
-        "current": {
-          "isNone": true,
-          "text": "None",
-          "value": ""
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "",
         "hide": 2,
         "includeAll": false,
@@ -1254,12 +1235,8 @@
       {
         "allFormat": "glob",
         "allValue": "",
-        "current": {
-          "isNone": true,
-          "text": "None",
-          "value": ""
-        },
-        "datasource": "Prometheus",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_exporter_build_info{env=~'$env'},name)",
         "hide": 2,
         "includeAll": false,
@@ -1280,7 +1257,7 @@
         "useTags": false
       },
       {
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "filters": [],
         "hide": 0,
         "label": "",
@@ -1323,5 +1300,5 @@
   "timezone": "browser",
   "title": "pl-node-filesystem",
   "uid": "ED979A7ED85932BC34FABBFE3E10A014",
-  "version": 1
+  "version": 3
 }
