@@ -48,47 +48,6 @@
   "graphTooltip": 0,
   "id": 16,
   "iteration": 1574063704379,
-  "links": [
-    {
-      "asDropdown": false,
-      "icon": "info",
-      "includeVars": false,
-      "tags": [
-        "$node"
-      ],
-      "targetBlank": true,
-      "title": "Server IP：$node",
-      "type": "link",
-      "url": ""
-    },
-    {
-      "icon": "external link",
-      "tags": [],
-      "targetBlank": true,
-      "title": "Update node_exporter",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://github.com/prometheus/node_exporter/releases"
-    },
-    {
-      "icon": "external link",
-      "tags": [],
-      "targetBlank": true,
-      "title": "Update Dashboards",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://grafana.com/dashboards/11074"
-    },
-    {
-      "icon": "external link",
-      "tags": [],
-      "targetBlank": true,
-      "title": "StarsL's Blog",
-      "tooltip": "",
-      "type": "link",
-      "url": "https://starsl.cn"
-    }
-  ],
   "panels": [
     {
       "collapsed": false,
@@ -113,7 +72,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 1,
       "description": "System uptime from /proc/stat",
       "format": "s",
@@ -172,7 +131,7 @@
           "expr": "node_time_seconds{instance=~\"$node\",job=~\"$job\"} - node_boot_time_seconds{instance=~\"$node\",job=~\"$job\"}",
           "instant": true,
           "intervalFactor": 2,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{`{{instance}}`}}",
           "refId": "A",
           "step": 1800
         }
@@ -192,7 +151,7 @@
     },
     {
       "columns": [],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Labeled system information as provided by the uname system call.",
       "fontSize": "110%",
       "gridPos": {
@@ -413,7 +372,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Busy state of all CPU cores together",
       "format": "short",
       "gauge": {
@@ -499,7 +458,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "Non available RAM memory",
       "format": "bytes",
@@ -559,7 +518,7 @@
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{`{{instance}}`}}",
           "refId": "A",
           "step": 20
         }
@@ -586,7 +545,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "Total SWAP",
       "format": "bytes",
@@ -645,7 +604,7 @@
           "expr": "sum(node_memory_SwapTotal_bytes{instance=~\"$node\",job=~\"$job\"})",
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{`{{instance}}`}}",
           "refId": "A",
           "step": 900
         }
@@ -672,7 +631,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(50, 172, 45, 0.97)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "Filesystem size in bytes.",
       "format": "bytes",
@@ -732,7 +691,7 @@
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
-          "legendFormat": "{{instance}}",
+          "legendFormat": "{{`{{instance}}`}}",
           "refId": "A",
           "step": 20
         }
@@ -759,7 +718,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "System Load (1m avg)",
       "format": "short",
@@ -818,6 +777,7 @@
           "expr": "node_load1{instance=~\"$node\",job=~\"$job\"}",
           "hide": false,
           "intervalFactor": 1,
+          "instant": true,
           "refId": "A",
           "step": 900
         }
@@ -844,7 +804,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "System Load (5m avg)",
       "format": "short",
@@ -903,6 +863,7 @@
           "expr": "node_load5{instance=~\"$node\",job=~\"$job\"}",
           "hide": false,
           "intervalFactor": 1,
+          "instant": true,
           "refId": "A",
           "step": 900
         }
@@ -942,7 +903,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "Busy state of all CPU cores together",
       "format": "percent",
@@ -1029,7 +990,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 0,
       "description": "Non available RAM memory",
       "format": "percent",
@@ -1090,6 +1051,7 @@
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,
+          "instant": true,
           "refId": "A",
           "step": 900
         },
@@ -1098,6 +1060,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
+          "instant": true,
           "refId": "B",
           "step": 900
         }
@@ -1118,7 +1081,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "Used Swap",
       "format": "percent",
@@ -1176,6 +1139,7 @@
         {
           "expr": "((node_memory_SwapTotal_bytes{instance=~\"$node\",job=~\"$job\"} - node_memory_SwapFree_bytes{instance=~\"$node\",job=~\"$job\"}) / (node_memory_SwapTotal_bytes{instance=~\"$node\",job=~\"$job\"} )) * 100",
           "intervalFactor": 1,
+          "instant": true,
           "refId": "A",
           "step": 900
         }
@@ -1202,7 +1166,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "Used Root FS",
       "format": "percent",
@@ -1262,6 +1226,7 @@
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A",
+          "instant": true,
           "step": 900
         }
       ],
@@ -1287,7 +1252,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "Busy state of all CPU cores together (1 min average)",
       "format": "percent",
@@ -1345,7 +1310,7 @@
         {
           "expr": "avg(node_load1{instance=~\"$node\",job=~\"$job\"}) /  count(count(node_cpu_seconds_total{instance=~\"$node\",job=~\"$job\"}) by (cpu)) * 100",
           "hide": false,
-          "instant": false,
+          "instant": true,
           "intervalFactor": 1,
           "refId": "A",
           "step": 900
@@ -1373,7 +1338,7 @@
         "rgba(237, 129, 40, 0.89)",
         "rgba(245, 54, 54, 0.9)"
       ],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "Busy state of all CPU cores together (5 min average)",
       "format": "percent",
@@ -1433,6 +1398,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
+          "instant": true,
           "refId": "A",
           "step": 900
         }
@@ -1452,7 +1418,7 @@
     },
     {
       "columns": [],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Network devices except for Hyper-V eth",
       "fontSize": "110%",
       "gridPos": {
@@ -1523,7 +1489,7 @@
       "type": "table"
     },
     {
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Overview of CPU, Memory, FS",
       "gridPos": {
         "h": 6,
@@ -1606,7 +1572,7 @@
     },
     {
       "columns": [],
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Filesystem space available to non-root users in bytes.",
       "fontSize": "110%",
       "gridPos": {
@@ -1815,7 +1781,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "Collected from /proc/stat, /sys/devices/system/cpu/cpu*, /proc/cpuinfo",
       "fill": 4,
@@ -1988,7 +1954,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 2,
       "description": "Collected from /proc/meminfo\t",
       "fill": 1,
@@ -2112,7 +2078,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": 3,
       "description": "Disk space used of all filesystems mounted",
       "fill": 4,
@@ -2159,7 +2125,7 @@
           "expr": "100 - ((node_filesystem_avail_bytes{instance=~\"$node\",job=~\"$job\",device!~'rootfs'} * 100) / node_filesystem_size_bytes{instance=~\"$node\",job=~\"$job\",device!~'rootfs'})",
           "format": "time_series",
           "intervalFactor": 2,
-          "legendFormat": "{{mountpoint}}",
+          "legendFormat": "{{`{{mountpoint}}`}}",
           "refId": "A",
           "step": 240
         }
@@ -2212,7 +2178,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Read/write completions per second",
       "fill": 1,
       "fillGradient": 1,
@@ -2265,7 +2231,7 @@
           "hide": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_Reads",
+          "legendFormat": "{{`{{device}}`}}_Reads",
           "refId": "A",
           "step": 10
         },
@@ -2274,7 +2240,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_Writes",
+          "legendFormat": "{{`{{device}}`}}_Writes",
           "refId": "B",
           "step": 10
         }
@@ -2328,7 +2294,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Per second read / write bytes ",
       "fill": 1,
       "fillGradient": 1,
@@ -2380,7 +2346,7 @@
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_Read",
+          "legendFormat": "{{`{{device}}`}}_Read",
           "refId": "A",
           "step": 10
         },
@@ -2389,7 +2355,7 @@
           "format": "time_series",
           "hide": false,
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_Written",
+          "legendFormat": "{{`{{device}}`}}_Written",
           "refId": "B",
           "step": 10
         }
@@ -2443,7 +2409,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Time spent on each read/write operation",
       "fill": 1,
       "fillGradient": 1,
@@ -2497,7 +2463,7 @@
           "instant": false,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_Read time",
+          "legendFormat": "{{`{{device}}`}}_Read time",
           "refId": "B"
         },
         {
@@ -2506,7 +2472,7 @@
           "hide": false,
           "instant": false,
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_Write time",
+          "legendFormat": "{{`{{device}}`}}_Write time",
           "refId": "C"
         }
       ],
@@ -2560,7 +2526,7 @@
       "cacheTimeout": null,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Collected from /sys/fs/file-nr",
       "fill": 0,
       "fillGradient": 1,
@@ -2618,13 +2584,13 @@
           "instant": false,
           "interval": "",
           "intervalFactor": 5,
-          "legendFormat": "filefd_{{instance}}",
+          "legendFormat": "filefd_{{`{{instance}}`}}",
           "refId": "B"
         },
         {
           "expr": "irate(node_context_switches_total{instance=~\"$node\"}[30m])",
           "intervalFactor": 5,
-          "legendFormat": "switches_{{instance}}",
+          "legendFormat": "switches_{{`{{instance}}`}}",
           "refId": "A"
         },
         {
@@ -2692,7 +2658,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "decimals": null,
       "description": "The time spent on I/O in the natural time of each second.（wall-clock time）",
       "fill": 1,
@@ -2741,7 +2707,7 @@
           "expr": "irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[30m])",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_ IO time",
+          "legendFormat": "{{`{{device}}`}}_ IO time",
           "refId": "C"
         }
       ],
@@ -2795,7 +2761,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "Exposes network interface statistics such as bytes transferred.",
       "fill": 1,
       "fillGradient": 3,
@@ -2847,7 +2813,7 @@
           "expr": "irate(node_network_receive_bytes_total{instance=~'$node',device!~'tap.*|veth.*|br.*|docker.*|virbr*|lo*'}[30m])*8",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_receive",
+          "legendFormat": "{{`{{device}}`}}_receive",
           "refId": "A",
           "step": 4
         },
@@ -2855,7 +2821,7 @@
           "expr": "irate(node_network_transmit_bytes_total{instance=~'$node',device!~'tap.*|veth.*|br.*|docker.*|virbr*|lo*'}[30m])*8",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{device}}_transmit",
+          "legendFormat": "{{`{{device}}`}}_transmit",
           "refId": "B",
           "step": 4
         }
@@ -2908,7 +2874,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": "${DS_PROMETHEUS}",
       "description": "TCP_alloc - Allocated sockets\n\nCurrEstab - TCP connections for which the current state is either ESTABLISHED or CLOSE- WAIT\n\nTCP_tw - Sockets wating close\n\nUDP_inuse - Udp sockets currently in use\n\nSockets_used - Sockets currently in use",
       "fill": 1,
       "fillGradient": 0,
@@ -3048,7 +3014,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3153,7 +3119,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "Exposes load average.",
           "editable": true,
           "error": false,
@@ -3275,7 +3241,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3327,7 +3293,7 @@
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{ type }} - {{ info }}",
+              "legendFormat": "{{`{{ type }}`}} - {{`{{ info }}`}}",
               "refId": "A",
               "step": 240
             }
@@ -3378,7 +3344,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3483,7 +3449,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3575,7 +3541,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3675,7 +3641,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3768,7 +3734,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 2,
           "fillGradient": 0,
           "gridPos": {
@@ -3867,7 +3833,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fill": 2,
           "fillGradient": 0,
@@ -3974,7 +3940,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "",
           "fill": 2,
           "fillGradient": 0,
@@ -4105,6 +4071,8 @@
     "list": [
       {
         "current": {
+          "selected": false,
+          "tags": [],
           "text": "Prometheus",
           "value": "Prometheus"
         },
@@ -4112,7 +4080,7 @@
         "includeAll": false,
         "label": "",
         "multi": false,
-        "name": "datasource",
+        "name": "DS_PROMETHEUS",
         "options": [],
         "query": "prometheus",
         "refresh": 1,
@@ -4123,10 +4091,11 @@
       {
         "allValue": null,
         "current": {
+          "selected": true,
           "text": "node-exporter",
           "value": "node-exporter"
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_uname_info, job)",
         "hide": 0,
         "includeAll": false,
@@ -4147,19 +4116,16 @@
       },
       {
         "allValue": null,
-        "current": {
-          "text": "VM_4_11_centos",
-          "value": "VM_4_11_centos"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(node_uname_info{job=~\"$job\"}, tke_cluster)",
         "hide": 0,
         "includeAll": false,
-        "label": "Host",
+        "label": "TKE",
         "multi": false,
-        "name": "hostname",
+        "name": "tke",
         "options": [],
-        "query": "label_values(node_uname_info{job=~\"$job\"}, nodename)",
+        "query": "label_values(node_uname_info{job=~\"$job\"}, tke_cluster)",
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
@@ -4173,12 +4139,9 @@
       {
         "allFormat": "glob",
         "allValue": null,
-        "current": {
-          "text": "9.139.4.11:9100",
-          "value": "9.139.4.11:9100"
-        },
-        "datasource": "Prometheus",
-        "definition": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(node_uname_info{tke_cluster=~\"$tke\"},instance)",
         "hide": 0,
         "includeAll": false,
         "label": "IP",
@@ -4186,7 +4149,7 @@
         "multiFormat": "regex values",
         "name": "node",
         "options": [],
-        "query": "label_values(node_uname_info{nodename=~\"$hostname\"},instance)",
+        "query": "label_values(node_uname_info{tke_cluster=~\"$tke\"},instance)",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -4200,10 +4163,11 @@
       {
         "allValue": null,
         "current": {
-          "text": "/",
-          "value": "/"
+          "isNone": true,
+          "text": "None",
+          "value": ""
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "",
         "hide": 2,
         "includeAll": false,
@@ -4230,7 +4194,7 @@
           "text": "None",
           "value": ""
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "",
         "hide": 2,
         "includeAll": false,
@@ -4258,7 +4222,7 @@
           "text": "None",
           "value": ""
         },
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(node_exporter_build_info{env=~'$env'},name)",
         "hide": 2,
         "includeAll": false,
@@ -4279,7 +4243,7 @@
         "useTags": false
       },
       {
-        "datasource": "Prometheus",
+        "datasource": "${DS_PROMETHEUS}",
         "filters": [],
         "hide": 0,
         "label": "",
